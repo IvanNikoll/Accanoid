@@ -374,10 +374,15 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Free 2D Cartoon Parallax Background/Demo/Script/BackgroundControl_0.cs"
+"Assets/Free 2D Cartoon Parallax Background/Demo/Script/ParallaxBackground_0.cs"
 "Assets/Scripts/Ball.cs"
 "Assets/Scripts/Block.cs"
+"Assets/Scripts/Data.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/Paddle.cs"
+"Assets/Scripts/TriggerZone.cs"
 -langversion:9.0
 
 /deterministic

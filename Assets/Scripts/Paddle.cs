@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float paddleSpeed;
+    private GameManager GameManagerScript;
+    private float paddleSpeed;
     Rigidbody2D paddleRB;
     public BoxCollider2D colliderML;
     public BoxCollider2D colliderLL;
     public BoxCollider2D colliderMR;
     public BoxCollider2D colliderRR;
-   // public BoxCollider2D[] paddleCollider;
+    public bool paddleBlocked = false;
     private void Awake()
     {
         paddleRB = gameObject.GetComponent<Rigidbody2D>();
@@ -19,35 +20,40 @@ public class Paddle : MonoBehaviour
         colliderML = GameObject.Find("ZoneML").GetComponent<BoxCollider2D>();
         colliderMR = GameObject.Find("ZoneMR").GetComponent<BoxCollider2D>();
         colliderRR = GameObject.Find("ZoneRR").GetComponent<BoxCollider2D>();
-     //   paddleCollider = GetComponents<BoxCollider2D>();
-     //   colliderLL = paddleCollider[1];
-     //   colliderML = paddleCollider[2];
-     //   colliderMR = paddleCollider[3];
-     //   colliderRR = paddleCollider[4];
-            
+        GameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+    
     }
     void Update()
     {
-        if (Input.GetAxis("Horizontal") < 0 )
+        if (!GameManagerScript.isGameOver && GameManagerScript.isGameStarted)
         {
-            paddleRB.AddForce(Vector2.left * paddleSpeed,ForceMode2D.Impulse);
-        }
-        if (Input.GetAxis("Horizontal") > 0 )
-        {
-            paddleRB.AddForce(Vector2.right * paddleSpeed, ForceMode2D.Impulse);
-        }
-        
-        // reduce paddle speed if player doesn't press the button
-            if(paddleRB.velocity.x> 0 && !Input.GetKeyDown(KeyCode.RightArrow))
+
+
+
+            if (Input.GetAxis("Horizontal") < 0)
             {
-                Vector2 retardingVector = paddleRB.velocity; 
-                paddleRB.AddForce(-retardingVector/2, ForceMode2D.Impulse);
+                paddleRB.AddForce(Vector2.left * paddleSpeed, ForceMode2D.Impulse);
             }
-            if (paddleRB.velocity.x <0  && !Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                paddleRB.AddForce(Vector2.right * paddleSpeed, ForceMode2D.Impulse);
+            }
+
+            // reduce paddle speed if player doesn't press the button
+            if (paddleRB.velocity.x > 0 && !Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Vector2 retardingVector = paddleRB.velocity;
-                paddleRB.AddForce(-retardingVector/2, ForceMode2D.Impulse);
+                paddleRB.AddForce(-retardingVector / 2, ForceMode2D.Impulse);
             }
+            if (paddleRB.velocity.x < 0 && !Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Vector2 retardingVector = paddleRB.velocity;
+                paddleRB.AddForce(-retardingVector / 2, ForceMode2D.Impulse);
+            }
+
+        }
+        
                 
     }
    
